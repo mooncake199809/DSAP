@@ -114,7 +114,7 @@ def make_matching_figures(data, config, mode='evaluation'):
     """ Make matching figures for a batch.
 
     Args:
-        data (Dict): a batch updated by PL_LoFTR.
+        data (Dict): a batch updated
         config (Dict): matcher config
     Returns:
         figures (Dict[str, List[plt.figure]]

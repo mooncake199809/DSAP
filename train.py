@@ -15,7 +15,7 @@ from src.config.default import get_cfg_defaults
 from src.utils.misc import get_rank_zero_only_logger, setup_gpus
 from src.utils.profiler import build_profiler
 from src.lightning.data import MultiSceneDataModule
-from src.lightning.lightning_loftr import PL_DSAP
+from src.lightning.lightning_dsap import PL_DSAP
 
 loguru_logger = get_rank_zero_only_logger(loguru_logger)
 
@@ -39,7 +39,7 @@ def parse_args():
         nargs='?', default=True, help='whether loading data to pinned memory or not')
     parser.add_argument(
         '--ckpt_path', type=str, default=None,
-        help='pretrained checkpoint path, helpful for using a pre-trained coarse-only LoFTR')
+        help='pretrained checkpoint path, helpful for using a pre-trained coarse-only DSAP')
     parser.add_argument(
         '--disable_ckpt', action='store_true',
         help='disable checkpoint saving (useful for debugging).')
@@ -79,11 +79,11 @@ def main():
     # lightning module
     profiler = build_profiler(args.profiler_name)
     model = PL_DSAP(config, pretrained_ckpt=args.ckpt_path, profiler=profiler)
-    loguru_logger.info(f"LoFTR LightningModule initialized!")
+    loguru_logger.info(f"DSAP LightningModule initialized!")
     
     # lightning data
     data_module = MultiSceneDataModule(args, config)
-    loguru_logger.info(f"LoFTR DataModule initialized!")
+    loguru_logger.info(f"DSAP DataModule initialized!")
     
     # TensorBoard Logger
     logger = TensorBoardLogger(save_dir='/mnt/lustre/xietao/deepmatcher/score_dk_final_nodw', name=args.exp_name, default_hp_metric=False)

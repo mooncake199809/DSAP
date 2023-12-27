@@ -47,7 +47,7 @@ class ScanNetDataset(utils.data.Dataset):
                 self.data_names = self.data_names[kept_mask]
         self.intrinsics = dict(np.load(intrinsic_path))
 
-        # for training LoFTR
+        # for training DSAP
         self.augment_fn = augment_fn if mode == 'train' else None
 
     def __len__(self):

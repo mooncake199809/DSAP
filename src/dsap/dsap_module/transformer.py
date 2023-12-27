@@ -133,13 +133,13 @@ class DWConv(nn.Module):
         x = x.flatten(2).transpose(1, 2)
         return x
 
-class LoFTREncoderLayer(nn.Module):
+class DSAPEncoderLayer(nn.Module):
     def __init__(self,
                  d_model,
                  nhead,
                  attention='linear',
                  isdw=False):
-        super(LoFTREncoderLayer, self).__init__()
+        super(DSAPEncoderLayer, self).__init__()
 
         self.dim = d_model // nhead
         self.nhead = nhead
@@ -229,8 +229,6 @@ class LoFTREncoderLayer(nn.Module):
 
 # -----------------------------------------------------------------------Fine--------------------------------------------------------------------------
 class LocalFeatureTransformer(nn.Module):
-    """A Local Feature Transformer (LoFTR) module."""
-
     def __init__(self, config):
         super(LocalFeatureTransformer, self).__init__()
 
@@ -239,9 +237,8 @@ class LocalFeatureTransformer(nn.Module):
         self.nhead = config['nhead']
         self.layer_names = config['layer_names']
         self.isdw = config['isdw']
-        self.score_lists = [[] for _ in range(len(self.layer_names))]
-
-        self.layers = nn.ModuleList([copy.deepcopy(LoFTREncoderLayer(config['d_model'], config['nhead'], config['attention'], self.isdw[_])) for _ in range(len(self.layer_names))])
+        
+        self.layers = nn.ModuleList([copy.deepcopy(DSAPEncoderLayer(config['d_model'], config['nhead'], config['attention'], self.isdw[_])) for _ in range(len(self.layer_names))])
         self._reset_parameters()
 
     def _reset_parameters(self):
@@ -258,10 +255,9 @@ class LocalFeatureTransformer(nn.Module):
             mask1 (torch.Tensor): [N, S] (optional)
         """
         assert self.d_model == feat0.size(2), "the feature number of src and transformer must be equal"
-        for layer, name, score_list in zip(self.layers, self.layer_names, self.score_lists):
+        for layer, name in zip(self.layers, self.layer_names):
             feat0, score = layer(feat0, feat1, mask0, mask1, data)
             feat1, score = layer(feat1, feat0, mask1, mask0, data)
-            score_list.append(score.detach().cpu().numpy())
         return feat0, feat1
 
 threshold=0.5
@@ -282,13 +278,13 @@ class BinarizerFn(torch.autograd.Function):
 binarizer_fn = BinarizerFn.apply
 
 
-class LoFTREncoderLayer_Fine(nn.Module):
+class DSAPEncoderLayer_Fine(nn.Module):
     def __init__(self,
                  d_model,
                  nhead,
                  attention='linear',
                  isdw=False):
-        super(LoFTREncoderLayer_Fine, self).__init__()
+        super(DSAPEncoderLayer_Fine, self).__init__()
 
         self.dim = d_model // nhead
         self.nhead = nhead
@@ -337,8 +333,6 @@ class LoFTREncoderLayer_Fine(nn.Module):
 
 
 class LocalFeatureTransformer_Fine(nn.Module):
-    """A Local Feature Transformer (LoFTR) module."""
-
     def __init__(self, config):
         super(LocalFeatureTransformer_Fine, self).__init__()
 
@@ -347,7 +341,7 @@ class LocalFeatureTransformer_Fine(nn.Module):
         self.nhead = config['nhead']
         self.layer_names = config['layer_names']
 
-        encoder_layer = LoFTREncoderLayer_Fine(config['d_model'], config['nhead'], config['attention'])
+        encoder_layer = DSAPEncoderLayer_Fine(config['d_model'], config['nhead'], config['attention'])
         self.layers = nn.ModuleList([copy.deepcopy(encoder_layer) for _ in range(len(self.layer_names))])
         self._reset_parameters()
 

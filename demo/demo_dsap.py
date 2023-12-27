@@ -10,7 +10,7 @@ import cv2
 import numpy as np
 import matplotlib.cm as cm
 from src.utils.plotting import make_matching_figure
-from src.dsap import LoFTR, default_cfg
+from src.dsap import DSAP, default_cfg
 from src.utils.dataset import read_megadepth_gray
 import torch
 
@@ -63,7 +63,7 @@ class Show_Matches_outdoor():
 if __name__ == '__main__':
     _default_cfg = deepcopy(default_cfg)
     _default_cfg['coarse']['temp_bug_fix'] = True  # set to False when using the old ckpt
-    matcher = LoFTR(config=_default_cfg)
+    matcher = DSAP(config=_default_cfg)
     model_path = "/home/dk/LoFTR_NEW/zishiying/LoFTR_Auto_newattention/weights/epoch=59-auc@5=0.574-auc@10=0.729-auc@20=0.839.ckpt"
     matcher.load_state_dict(torch.load(model_path)['state_dict'])
     matcher = matcher.eval().cuda()

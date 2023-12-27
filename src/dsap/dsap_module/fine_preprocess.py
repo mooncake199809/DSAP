@@ -46,7 +46,6 @@ class FinePreprocess(nn.Module):
         feat_f0_unfold = feat_f0_unfold[data['b_ids'], data['i_ids']]  # [n, ww, cf]
         feat_f1_unfold = feat_f1_unfold[data['b_ids'], data['j_ids']]
 
-        # option: use coarse-level loftr feature as context: concat and linear
         if self.cat_c_feat:
             feat_c_win = self.down_proj(torch.cat([feat_c0[data['b_ids'], data['i_ids']],
                                                    feat_c1[data['b_ids'], data['j_ids']]], 0))  # [2n, c]

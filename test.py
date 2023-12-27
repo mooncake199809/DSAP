@@ -7,8 +7,7 @@ from src.config.default import get_cfg_defaults
 from src.utils.profiler import build_profiler
 
 from src.lightning.data import MultiSceneDataModule
-from src.lightning.lightning_loftr import PL_DSAP
-
+from src.lightning.lightning_dsap import PL_DSAP
 
 def parse_args():
     # init a costum parser which will be added into pl.Trainer parser
@@ -48,14 +47,14 @@ if __name__ == '__main__':
 
     # tune when testing
     if args.thr is not None:
-        config.LOFTR.MATCH_COARSE.THR = args.thr
+        config.DSAP.MATCH_COARSE.THR = args.thr
 
     loguru_logger.info(f"Args and config initialized!")
 
     # lightning module
     profiler = build_profiler(args.profiler_name)
     model = PL_DSAP(config, pretrained_ckpt=args.ckpt_path, profiler=profiler, dump_dir=args.dump_dir)
-    loguru_logger.info(f"LoFTR-lightning initialized!")
+    loguru_logger.info(f"DSAP-lightning initialized!")
 
     # lightning data
     data_module = MultiSceneDataModule(args, config)

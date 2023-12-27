@@ -8,9 +8,9 @@ class DSAPLoss(nn.Module):
     def __init__(self, config):
         super().__init__()
         self.config = config  # config under the global namespace
-        self.loss_config = config['loftr']['loss']
-        self.match_type = self.config['loftr']['match_coarse']['match_type']
-        self.sparse_spvs = self.config['loftr']['match_coarse']['sparse_spvs']
+        self.loss_config = config['dsap']['loss']
+        self.match_type = self.config['dsap']['match_coarse']['match_type']
+        self.sparse_spvs = self.config['dsap']['match_coarse']['sparse_spvs']
         
         # coarse-level
         self.correct_thr = self.loss_config['fine_correct_thr']

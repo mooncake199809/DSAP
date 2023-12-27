@@ -2,14 +2,13 @@
 SCRIPTPATH=$(dirname $(readlink -f "$0"))
 PROJECT_DIR="${SCRIPTPATH}/../../"
 
-# conda activate loftr
 export PYTHONPATH=$PROJECT_DIR:$PYTHONPATHs
 cd $PROJECT_DIR
 
 # to reproduced the results in our paper, please use:
 TRAIN_IMG_SIZE=640
 data_cfg_path="configs/data/megadepth_trainval_${TRAIN_IMG_SIZE}.py"
-main_cfg_path="configs/loftr/outdoor/loftr_ds_dense.py"
+main_cfg_path="configs/dsap/outdoor/dsap_ds_dense.py"
 
 n_nodes=1
 n_gpus_per_node=1

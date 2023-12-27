@@ -57,7 +57,6 @@ class MegaDepthDataset(Dataset):
         self.img_padding = img_padding
         self.depth_max_size = 2000 if depth_padding else None  # the upperbound of depthmaps size in megadepth.
 
-        # for training LoFTR
         self.augment_fn = augment_fn if mode == 'train' else None
         self.coarse_scale = getattr(kwargs, 'coarse_scale', 0.125)
 
@@ -115,7 +114,6 @@ class MegaDepthDataset(Dataset):
             'pair_names': (self.scene_info['image_paths'][idx0], self.scene_info['image_paths'][idx1]),
         }
 
-        # for LoFTR training
         if mask0 is not None:  # img_padding is True
             if self.coarse_scale:
                 [ts_mask_0, ts_mask_1] = F.interpolate(torch.stack([mask0, mask1], dim=0)[None].float(),

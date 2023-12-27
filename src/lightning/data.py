@@ -69,7 +69,7 @@ class MultiSceneDataModule(pl.LightningDataModule):
         self.mgdpt_img_pad = config.DATASET.MGDPT_IMG_PAD   # True
         self.mgdpt_depth_pad = config.DATASET.MGDPT_DEPTH_PAD   # True
         self.mgdpt_df = config.DATASET.MGDPT_DF  # 8
-        self.coarse_scale = 1 / config.LOFTR.RESOLUTION[0]  # 0.125. for training loftr.
+        self.coarse_scale = 1 / config.DSAP.RESOLUTION[0]  # 0.125. for training dsap.
 
         # 3.loader parameters
         self.train_loader_params = {

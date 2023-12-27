@@ -13,12 +13,12 @@ _CN.RESOLUTION = (8, 2)  # options: [(8, 2), (16, 4)]
 _CN.FINE_WINDOW_SIZE = 5  # window_size in fine_level, must be odd
 _CN.FINE_CONCAT_COARSE_FEAT = True
 
-# 1. LoFTR-backbone (local feature CNN) config
+# 1. DSAP-backbone (local feature CNN) config
 _CN.RESNETFPN = CN()
 _CN.RESNETFPN.INITIAL_DIM = 128
 _CN.RESNETFPN.BLOCK_DIMS = [128, 196, 256]  # s1, s2, s3
 
-# 2. LoFTR-coarse module config
+# 2. DSAP-coarse module config
 _CN.COARSE = CN()
 _CN.COARSE.D_MODEL = 256
 _CN.COARSE.D_FFN = 256
@@ -40,7 +40,7 @@ _CN.MATCH_COARSE.SKH_PREFILTER = True
 _CN.MATCH_COARSE.TRAIN_COARSE_PERCENT = 0.4  # training tricks: save GPU memory
 _CN.MATCH_COARSE.TRAIN_PAD_NUM_GT_MIN = 200  # training tricks: avoid DDP deadlock
 
-# 4. LoFTR-fine module config
+# 4. DSAP-fine module config
 _CN.FINE = CN()
 _CN.FINE.D_MODEL = 128
 _CN.FINE.D_FFN = 128

@@ -39,7 +39,7 @@ def spvs_coarse(data, config):
     device = data['image0'].device
     N, _, H0, W0 = data['image0'].shape
     _, _, H1, W1 = data['image1'].shape
-    scale = config['LOFTR']['RESOLUTION'][0]
+    scale = config['DSAP']['RESOLUTION'][0]
     scale0 = scale * data['scale0'][:, None] if 'scale0' in data else scale
     scale1 = scale * data['scale1'][:, None] if 'scale0' in data else scale
     h0, w0, h1, w1 = map(lambda x: x // scale, [H0, W0, H1, W1])
@@ -130,8 +130,8 @@ def spvs_fine(data, config):
     # 1. misc
     # w_pt0_i, pt1_i = data.pop('spv_w_pt0_i'), data.pop('spv_pt1_i')
     w_pt0_i, pt1_i = data['spv_w_pt0_i'], data['spv_pt1_i']
-    scale = config['LOFTR']['RESOLUTION'][1]
-    radius = config['LOFTR']['FINE_WINDOW_SIZE'] // 2
+    scale = config['DSAP']['RESOLUTION'][1]
+    radius = config['DSAP']['FINE_WINDOW_SIZE'] // 2
 
     # 2. get coarse prediction
     b_ids, i_ids, j_ids = data['b_ids'], data['i_ids'], data['j_ids']

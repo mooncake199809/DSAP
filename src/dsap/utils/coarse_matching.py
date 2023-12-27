@@ -63,7 +63,7 @@ class CoarseMatching(nn.Module):
         # general config
         self.thr = config['thr']
         self.border_rm = config['border_rm']
-        # -- # for trainig fine-level LoFTR
+        # -- # for trainig fine-level DSAP
         self.train_coarse_percent = config['train_coarse_percent']
         self.train_pad_num_gt_min = config['train_pad_num_gt_min']
 
@@ -195,7 +195,7 @@ class CoarseMatching(nn.Module):
         j_ids = all_j_ids[b_ids, i_ids]
         mconf = conf_matrix[b_ids, i_ids, j_ids]
 
-        # 4. Random sampling of training samples for fine-level LoFTR
+        # 4. Random sampling of training samples for fine-level DSAP
         # (optional) pad samples with gt coarse-level matches
         if self.training:
             # NOTE:
