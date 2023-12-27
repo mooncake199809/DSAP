@@ -3,10 +3,14 @@ This is the PyTorch implementation of our paper "DSAP: A Dynamic Sparse Attentio
 
 We appreciate the previous open-source repository [LoFTR](https://github.com/zju3dv/LoFTR). Our work is built upon it.
 
-# Demo
+# Quick Demo
+![demo_img](https://github.com/mooncake199809/DSAP/blob/main/demo/img_res.jpg)
 We provide a demo to directly visualize the matching results of DSAP.
 You can directly modify your images path to test your own images.
-![demo_img](https://github.com/mooncake199809/DSAP/blob/main/demo/img_res.jpg)
+```bash
+python demo_dsap.py
+```
 
+# 
 
 
