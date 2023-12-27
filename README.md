@@ -6,7 +6,7 @@ We appreciate the previous open-source repository [LoFTR](https://github.com/zju
 # Demo
 We provide a demo to directly visualize the matching results of DSAP.
 You can directly modify your images path to test your own images.
-
+![demo_img](https://github.com/mooncake199809/DSAP/blob/main/demo/img_res.jpg)
 
 
 
