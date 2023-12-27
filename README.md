@@ -10,6 +10,7 @@ This is the PyTorch implementation of our paper "DSAP: A Dynamic Sparse Attentio
 We provide a demo to directly visualize the matching results of DSAP.
 You can directly modify your images path to test your own images.
 ```bash
+cd demo
 python demo_dsap.py
 ```
 
