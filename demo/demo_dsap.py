@@ -10,7 +10,7 @@ import cv2
 import numpy as np
 import matplotlib.cm as cm
 from src.utils.plotting import make_matching_figure
-from src.loftr import LoFTR, default_cfg
+from src.dsap import LoFTR, default_cfg
 from src.utils.dataset import read_megadepth_gray
 import torch
 

@@ -9,9 +9,9 @@ import numpy as np
 import pytorch_lightning as pl
 from matplotlib import pyplot as plt
 
-from src.loftr import LoFTR
-from src.loftr.utils.supervision import compute_supervision_coarse, compute_supervision_fine
-from src.losses.loftr_loss import LoFTRLoss
+from src.dsap import DSAP
+from src.dsap.utils.supervision import compute_supervision_coarse, compute_supervision_fine
+from src.losses.dsap_loss import DSAPLoss
 from src.optimizers import build_optimizer, build_scheduler
 from src.utils.metrics import (
     compute_symmetrical_epipolar_errors,
@@ -24,7 +24,7 @@ from src.utils.misc import lower_config, flattenList
 from src.utils.profiler import PassThroughProfiler
 
 
-class PL_LoFTR(pl.LightningModule):
+class PL_DSAP(pl.LightningModule):
     def __init__(self, config, pretrained_ckpt=None, profiler=None, dump_dir=None):
         """
         TODO:
@@ -39,8 +39,8 @@ class PL_LoFTR(pl.LightningModule):
         self.n_vals_plot = max(config.TRAINER.N_VAL_PAIRS_TO_PLOT // config.TRAINER.WORLD_SIZE, 1)
 
         # Matcher: LoFTR
-        self.matcher = LoFTR(config=_config['loftr'])
-        self.loss = LoFTRLoss(_config)
+        self.matcher = DSAP(config=_config['loftr'])
+        self.loss = DSAPLoss(_config)
 
         # Pretrained weights
         if pretrained_ckpt:

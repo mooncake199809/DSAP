@@ -17,7 +17,7 @@ n_gpus_per_node=1
 torch_num_workers=4
 batch_size=1  # per gpu
 
-CUDA_VISIBLE_DEVICES=0 python -u ./test.py \
+python -u ./test.py \
     ${data_cfg_path} \
     ${main_cfg_path} \
     --ckpt_path=${ckpt_path} \
