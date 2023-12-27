@@ -26,7 +26,7 @@ bash scripts/reproduce_train/outdoor_ds.sh
 ```
 
 # Evaluation
-The pre-trained models can be downloaded from [DSAP_Mega](https://1drv.ms/u/s!AsLK4P4ia2R9biMdEyi_uQ-0No0?e=kLSPnh).
+The pre-trained models can be downloaded from [DSAP_Mega](https://drive.google.com/drive/folders/1FU8GZ_VdUdbBhPw7m00JNr5Nzd7ZEDg4).
 Then, we run the following code to test DSAP.
 ```bash
 bash scripts/reproduce_test/outdoor_ds.sh
